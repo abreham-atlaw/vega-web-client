@@ -1,0 +1,51 @@
+<template>
+	<div>
+	  <slot name="loading" v-if="isLoading"><LoadingView/></slot>
+	  <slot name="failed" v-else-if="isFailed" :error="state.initState.error"><ErrorView :error="state.initState.error!"/></slot>
+	  <slot v-else></slot>
+	</div>
+  </template>
+  
+<script lang="ts">
+import { defineComponent } from "vue";
+import LoadingView from "./LoadingView.vue";
+import ErrorView from "./ErrorView.vue";
+import BaseState from "@/lib/state/baseState";
+import ViewModel from "@/lib/viewmodel/viewmodel";
+import { AsyncStatus } from "@/lib/state/asyncState";
+
+export default defineComponent({
+	
+	props: {
+		state: {
+			type: BaseState,
+			required: true
+		},
+		viewModel: {
+			type: ViewModel,
+			required: true
+		}
+	},
+	created() {
+		this.viewModel.initialize();
+	},
+
+	computed: {
+		isLoading() {
+			return (
+				this.state.initState.status === AsyncStatus.loading ||
+				this.state.initState.status === AsyncStatus.none
+			);
+		},
+	
+		isFailed() {
+			return this.state.initState.status === AsyncStatus.failed;
+		}
+	},
+	
+	components: {
+		LoadingView,
+		ErrorView
+	}
+});
+</script>
