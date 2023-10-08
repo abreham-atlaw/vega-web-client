@@ -18,7 +18,7 @@ export default defineComponent({
 </script>
 <template>
 
-	<button :class="`bg-${bg} py-4 px-12 text-white rounded-full mt-9`">
+	<button :class="`bg-${bg} py-4 px-12 text-white rounded-xl mt-9`">
 		<slot></slot>
 	</button>
 

@@ -1,6 +1,7 @@
 import Request from "@/lib/network/Request"
 import type User from "../models/user";
 import UserSerializer from "../serializers/userSerializer";
+import type { AxiosRequestConfig } from "axios";
 
 
 export class LoginRequest extends Request<string>{
@@ -21,6 +22,36 @@ export class LoginRequest extends Request<string>{
 	}
 
 }
+
+
+export class SignupRequest extends Request<User>{
+
+	private serializer = new UserSerializer();
+
+	constructor(
+		username: String,
+		fullName: String,
+		password: String
+	){
+		super({
+			url: "/auth/signup/",
+			method: "POST",
+			data: {
+				"username": username,
+				"full_name": fullName,
+				"password": password
+			}
+		});
+	}
+
+	deserializeResponse(response: any): User {
+		return this.serializer.deserialize(
+			response
+		);
+	}
+
+}
+
 
 
 export class WhoAmIRequest extends Request<User>{
@@ -56,4 +87,23 @@ export class DeleteAccountRequest extends Request<void>{
 	deserializeResponse(response: any): void {
 		return;
 	}
+}
+
+
+export class UserExistsRequest extends Request<Boolean>{
+
+	constructor(username: string){
+		super({
+			url: "/auth/user-exists/",
+			method: "GET",
+			params: {
+				email: username
+			}
+		})
+	}
+
+	deserializeResponse(response: any) {
+		return response.exists;
+	}
+
 }

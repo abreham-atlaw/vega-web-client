@@ -26,9 +26,9 @@ export default defineComponent({
 			<SlideshowComponent/>
 		</div>
 		<div class="w-1/2 h-full text-light flex">
-			<div class="m-auto w-4/5 h-1/2">
+			<div class="m-auto w-4/5">
 
-				<h1 class="text-5xl font-bold">{{ heading }}</h1>
+				<h1 class="text-5xl text-bold">{{ heading }}</h1>
 				<p class="mt-5">{{ text }}</p>
 				
 				<slot></slot>

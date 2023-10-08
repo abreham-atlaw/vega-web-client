@@ -15,6 +15,11 @@ module.exports = {
 		},
 		},
 	},
+	safelist: [
+		{
+			pattern: /./, // the "." means "everything"
+		},
+	],
 	variants: {},
 	plugins: [],
 	content: [

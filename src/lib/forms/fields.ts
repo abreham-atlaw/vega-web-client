@@ -59,7 +59,7 @@ export class TextField extends Field<string>{
 	}
 
 	public getValue(): string | null {
-		let value = super.getValue()
+		const value = super.getValue()
 		if(this.emptyAsNull && value === ""){
 			return null;
 		}

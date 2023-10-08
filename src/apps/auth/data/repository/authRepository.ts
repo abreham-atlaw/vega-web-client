@@ -1,10 +1,9 @@
 import CoreProviders from "@/di/coreProviders";
 import type NetworkClient from "@/lib/network/NetworkClient";
-import { DeleteAccountRequest, LoginRequest, WhoAmIRequest } from "../requests/authRequests";
+import { DeleteAccountRequest, LoginRequest, SignupRequest, UserExistsRequest, WhoAmIRequest } from "../requests/authRequests";
 import AuthenticationStatus from "../models/authenticationStatus";
 import type AuthenticatedNetworkClient from "@/lib/network/AuthenticatedNetworkClient";
 import type TokenStorage from "@/lib/utils/tokenStorage";
-import { ApiException } from "@/lib/network/NetworkClient";
 import type User from "../models/user";
 import { AxiosError } from "axios";
 
@@ -17,12 +16,22 @@ export default class AuthRepository{
 	tokenStorage: TokenStorage = CoreProviders.provideTokenStorage();
 	
 	async login(username: string, password: string): Promise<void>{
-		let token = await this.networkClient.execute(new LoginRequest(username, password));
+		const token = await this.networkClient.execute(new LoginRequest(username, password));
 		await this.tokenStorage.store(token);
+	}
+
+	async signup(username: string, fullName: string, password: string): Promise<User>{
+		const user = await this.networkClient.execute(new SignupRequest(username, fullName, password));
+		await this.login(username, password);
+		return user;
 	}
 
 	async me(): Promise<User>{
 		return await (await this.authenticatedNetworkClient).execute(new WhoAmIRequest());
+	}
+
+	async userExists(username: string): Promise<Boolean>{
+		return await this.networkClient.execute(new UserExistsRequest(username));
 	}
 
 	async deleteAccount(): Promise<void>{

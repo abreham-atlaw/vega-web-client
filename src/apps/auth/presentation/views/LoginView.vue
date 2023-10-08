@@ -61,24 +61,39 @@ export default defineComponent({
 			heading="LOG IN" 
 			text="Log in to continue your musical journey">
 
-			<LabeledFieldComponent
-				class="mt-5"
-				label="Email">
-				<TextFieldComponent
-					:field="state.form.phoneNumber"/>
-			</LabeledFieldComponent>
-			<LabeledFieldComponent
-				class="mt-5"
-				label="Password">
-				<TextFieldComponent
-					:field="state.form.password"/>
-			</LabeledFieldComponent>
+			<form @submit.prevent="submit">
 
-			<p class="text-center mt-5">Don't have an account? <RouterLink to="/auth/signup" class="fontweight-bold">Sign up</RouterLink></p>
+				<div class="text-danger my-2" v-if="state.error">
+					Incorrent username or password.
+				</div>
+
+				<LabeledFieldComponent
+					class="mt-5"
+					label="Email">
+					<TextFieldComponent
+						type="email"
+						:field="state.form.phoneNumber"/>
+				</LabeledFieldComponent>
+				<LabeledFieldComponent
+					class="mt-5"
+					label="Password">
+					<TextFieldComponent
+						:field="state.form.password"
+						type="password"
+						/>
+				</LabeledFieldComponent>
+
+				<p class="text-center mt-5">Don't have an account? <RouterLink to="/auth/signup" class="fontweight-bold">Sign up</RouterLink></p>
+				
+				<div class="flex">
+					<AsyncButton :state="state" class="mx-auto">
+						<span class="text-light">LOG IN</span>
+					</AsyncButton>
+				</div>
+
+			</form>
+
 			
-			<AsyncButton :state="state" bg="bg-light">
-				<span class="text-light">LOG IN</span>
-			</AsyncButton>
 
 		</AuthView>
 	
