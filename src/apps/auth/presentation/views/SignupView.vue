@@ -61,6 +61,7 @@ export default defineComponent({
     <AuthView
       heading="SIGN UP" 
       text="Unlock your creativity and personlize your musical experience"
+      :reverse="true"
     >
       <form @submit.prevent="submit">
 

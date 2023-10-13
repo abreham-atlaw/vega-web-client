@@ -5,6 +5,8 @@ import {OrbitSpinner} from 'epic-spinners';
 
 export default defineComponent({
 
+	name: "LoadingSpinner",
+
 	props: {
 		color: {
 			type: String,

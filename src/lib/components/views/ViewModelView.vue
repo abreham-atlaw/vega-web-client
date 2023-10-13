@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="h-full">
 	  <slot name="loading" v-if="isLoading"><LoadingView/></slot>
 	  <slot name="failed" v-else-if="isFailed" :error="state.initState.error"><ErrorView :error="state.initState.error!"/></slot>
 	  <slot v-else></slot>

@@ -14,6 +14,10 @@ export default defineComponent({
 		text: {
 			type: String,
 			required: true
+		},
+		reverse: {
+			type: Boolean,
+			default: false
 		}
 	}
 })
@@ -21,7 +25,7 @@ export default defineComponent({
 </script>
 <template>
 
-	<div class="flex bg-dark h-screen ">
+	<div :class="`flex bg-dark h-screen ${(reverse) ? 'flex-row-reverse' : ''}`">
 		<div class="w-1/2 h-full">
 			<SlideshowComponent/>
 		</div>

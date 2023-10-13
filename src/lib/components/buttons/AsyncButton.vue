@@ -13,6 +13,10 @@ export default defineComponent({
 		},
 		bg: {
 			type: String,
+		},
+		loadingColor: {
+			type: String,
+			default: "white"
 		}
 	},
 	computed: {
@@ -32,7 +36,7 @@ export default defineComponent({
 
 	<BaseButton :bg="bg">
 		<template v-if="isLoading">
-			<LoadingSpinner />
+			<LoadingSpinner class="mx-auto" :color="loadingColor"/>
 		</template>
 		<slot v-else></slot>
 	</BaseButton>

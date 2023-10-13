@@ -61,13 +61,13 @@ export class WhoAmIRequest extends Request<User>{
 
 	constructor(){
 		super({
-			url: "/worker/me/",
+			url: "/auth/me/",
 			method: "GET"
 		})
 	}
 
 	deserializeResponse(response: any): User {
-		return this.serializer.deserialize(response.user);
+		return this.serializer.deserialize(response);
 	}
 
 	
