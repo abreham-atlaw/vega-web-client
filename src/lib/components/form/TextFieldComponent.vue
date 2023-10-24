@@ -1,9 +1,10 @@
 <template>
 	<div>
 		<input
-		:class="`bg-${bg} border border-${borderWidth} border-${borderColor} text-${textColor} rounded-${borderRadius} focus:outline-none font-medium leading-none text-gray-800 py-5 w-full pl-3`"
+		:class="`${inputClass} color-${textColor} bg-${bg} border border-${borderWidth} border-${borderColor} text-${textColor} rounded-${borderRadius} focus:outline-none font-medium leading-none py-5 w-full pl-3`"
 		:type=type
 		:value="(field.getValue() === null) ? '' : field.getValue()"
+		:placeholder="placeholder"
 		@change="handleInput"
 		/>
 		<div
@@ -40,6 +41,10 @@ export default {
 			type: String,
 			default: "primaryDark"
 		},
+		inputClass: {
+			type: String,
+			default: ""
+		},
 		borderRadius:{
 			type: String,
 			default: "2xl"
@@ -55,6 +60,10 @@ export default {
 		textColor: {
 			type: String,
 			default: "light"
+		},
+		placeholder: {
+			type: String,
+			default: ""
 		}
 	},
 	methods: {

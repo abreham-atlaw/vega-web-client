@@ -1,15 +1,13 @@
-import type GenerateQuery from "@/apps/generate/data/models/generateQuery";
-import type StatusResponse from "@/apps/generate/data/models/statusResponse";
-import GenerateRequest from "@/apps/generate/data/requests/generateRequest";
-import GetGenerationStatusRequest from "@/apps/generate/data/requests/getStatusRequest";
 import CoreProviders from "@/di/coreProviders";
 import type NetworkClient from "@/lib/network/NetworkClient";
 import GetSongRequest from "../requests/getSongRequest";
 import GetRecentRequest from "../requests/getRecentsRequest";
 import type Song from "../models/song";
+import type Playlist from "../models/playlist";
+import {GetAllPlaylistsRequest, GetPlaylistRequest} from "../requests/playlistRequests";
 
 
-export default class SongRepository {
+export default class LibraryRepository {
   private readonly _networkClient: NetworkClient = CoreProviders.provideNetworkClient();
 
   private _authenticatedNetworkClient = CoreProviders.provideAuthenticatedNetworkClient();
@@ -20,6 +18,14 @@ export default class SongRepository {
 
   public async getRecent(): Promise<Song[]> {
     return await this._networkClient.execute(new GetRecentRequest());
+  }
+
+  public async getAllPlaylists(): Promise<Playlist[]> {
+    return await (await this._authenticatedNetworkClient).execute(new GetAllPlaylistsRequest());
+  }
+
+  public async getPlaylist(id: string): Promise<Playlist>{
+    return await (await this._authenticatedNetworkClient).execute(new GetPlaylistRequest(id));
   }
 
 }

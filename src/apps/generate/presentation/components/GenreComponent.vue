@@ -12,8 +12,6 @@ export default defineComponent({
     computed: {
 
         bgImage(): string{
-            // return "/src/assets/images/genres/afro_pop.png");"
-            // return "/src/assets/generate/images/genres/afro_pop.png";
             return `/src/assets/generate/images/genres/${this.genre.toLowerCase().replace(" ", "_").replace(" ", "_")}.png`;
         }
 

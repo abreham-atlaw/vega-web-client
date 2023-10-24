@@ -37,6 +37,12 @@ export default defineComponent({
         },
         download(){
             this.viewModel.download();
+        },
+        next(){
+            this.viewModel.next();
+        },
+        previous(){
+            this.viewModel.previous();
         }
 
     },
@@ -68,7 +74,7 @@ export default defineComponent({
                         <span class="fas fa-shuffle"></span>
                     </button>
     
-                    <button class="mx-auto">
+                    <button class="mx-auto" @click="previous">
                         <span class="fas fa-backward"></span>
                     </button>
                     
@@ -76,7 +82,7 @@ export default defineComponent({
                         <span class="fas m-auto text-sm" :class="(state.isPlaying) ? 'fa-pause' : 'fa-play'"></span>
                     </button>
     
-                    <button class="mx-auto">
+                    <button class="mx-auto" @click="next">
                         <span class="fas fa-forward"></span>
                     </button>
     
@@ -105,8 +111,10 @@ export default defineComponent({
     
             <div class="ml-auto w-1/4 flex my-auto">
                 <template v-if="state.currentSong != null">
-                    <button class="ml-auto fas fa-scroll">
-                    </button>
+                    <RouterLink class="ml-auto" to="/base/player/lyrics">
+                        <button class="fas fa-scroll">
+                        </button>
+                    </RouterLink>
                     <button class="ml-8 fas fa-download" @click="download">
                     </button>
                     <button class="ml-8 fas fa-list-ol">

@@ -1,23 +1,33 @@
 import BaseState from "@/lib/state/baseState";
-import GenerateQuery from "../../data/models/generateQuery";
+import type GenerateQuery from "../../data/models/generateQuery";
+import InputForm from "../forms/inputForm";
 import { AsyncState } from "@/lib/state/asyncState";
 
 
 export enum InputStage{
 
-    genre,
-    timeEra,
-    mood,
-    instruments,
-    lyrics,
+    mode,
+    input,
     done
 
 }
 
+export enum InputMode{
+    raw,
+    guided
+}
 
 export default class InputState extends AsyncState{
 
-    stage: InputStage = InputStage.genre
-    input: GenerateQuery = new GenerateQuery();
+    generateQuery?: GenerateQuery;
+    rawQuery?: string;
 
+    stage = InputStage.mode;
+
+    form = new InputForm();
+
+
+    get mode(): InputMode{
+        return this.form.mode.getValue()!;
+    }
 }

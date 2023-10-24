@@ -23,7 +23,7 @@ export default defineComponent({
                 <SideBarComponent/>
             </div>
             <div class="h-screen flex flex-col" style="width: 84%">
-                <div class="h-full">
+                <div class="h-full overflow-scroll">
                     <RouterView></RouterView>
                 </div>
                 <div class="h-24 mt-auto bg-dark">

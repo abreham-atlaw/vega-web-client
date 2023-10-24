@@ -13,7 +13,7 @@ export default abstract class TokenStorage{
 
 export class CookieTokenStorage extends TokenStorage{
 	async store(token: string): Promise<void> {
-		Cookies.set("AUTH_TOKEN", token);
+		await Cookies.set("AUTH_TOKEN", token);
 	}
 	async get(): Promise<string | null> {
 		return Cookies.get("AUTH_TOKEN") ?? null;

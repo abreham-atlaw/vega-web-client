@@ -6,6 +6,7 @@ import BaseButton from './BaseButton.vue';
 
 
 export default defineComponent({
+	name: "AsyncButton",
 	props: {
 		state: {
 			type: AsyncState,

@@ -1,20 +1,30 @@
 import AsyncViewModel from "@/lib/viewmodel/asyncViewModel";
 import type PlayerState from "../states/playerState";
 import type Song from "@/apps/core/data/models/song";
-import SongRepository from "@/apps/core/data/repositories/songRepository";
+import LibraryRepository from "@/apps/core/data/repositories/libraryRepository";
 import RoutingUtils from "@/lib/utils/routing";
+import type Playlist from "@/apps/core/data/models/playlist";
 
 
 
 export default class PlayerViewModel extends AsyncViewModel<PlayerState>{
 
-    private songRepository = new SongRepository();
+    private songRepository = new LibraryRepository();
 
 
     public async onInit(): Promise<void> {
         await super.onInit();
         this.state.htmlAudio.ontimeupdate = this.updateTime;
         this.state.htmlAudio.onended = this.onEnded;
+    }
+
+    get currentSong(): Song | null{
+        try{
+            return this.state.currentSong ?? null;
+        }
+        catch(ex){
+            return null;
+        }
     }
 
     async play(): Promise<void>{
@@ -28,19 +38,39 @@ export default class PlayerViewModel extends AsyncViewModel<PlayerState>{
         this.state.isPlaying = false;
     }
 
+    async next(){
+        this.playOnQueue(this.state.currentIdx! + 1)
+    }
+
+    async previous(){
+        this.playOnQueue(this.state.currentIdx! - 1)
+    }
+
     async playSongById(id: string): Promise<void>{
         const song = await this.songRepository.getSong(id);
         await this.playSong(song);
     }
 
     async playSong(song: Song): Promise<void>{
-        this.addToQueue(song);
+        this.addToQueue([song]);
         this.playOnQueue(this.state.queue.length - 1);
     }
 
-    async addToQueue(song: Song): Promise<void>{
-        this.state.originalQueue.push(song);
-        this.state.queue.push(song);
+    async playPlaylist(playlist: Playlist){
+        await this.clearQueue();
+        await this.addToQueue(playlist.songs);
+        await this.playOnQueue(0);
+    }
+
+    async addToQueue(songs: Song[]): Promise<void>{
+
+        songs.forEach(
+            (song: Song) => {
+                this.state.originalQueue.push(song);
+                this.state.queue.push(song);
+            }
+        )
+
     }
 
     async playOnQueue(index: number): Promise<void>{
@@ -76,8 +106,14 @@ export default class PlayerViewModel extends AsyncViewModel<PlayerState>{
     }
     
     private onEnded = (event: Event) => {
-        this.state.isPlaying = false;
+        if(this.state.currentIdx === this.state.queue.length - 1){
+            this.state.isPlaying = false;
+            return;
+        }
+        this.next();
     }
+
+
 
 
 }

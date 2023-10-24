@@ -2,7 +2,7 @@ import AsyncViewModel from "@/lib/viewmodel/asyncViewModel";
 import GenerateState from "../states/generateState";
 import GenerateRepository from "../../data/repositories/generateRepository";
 import StatusResponse, { GenerationStatus } from "../../data/models/statusResponse";
-import SongRepository from "@/apps/core/data/repositories/songRepository";
+import LibraryRepository from "@/apps/core/data/repositories/libraryRepository";
 import RoutingUtils from "@/lib/utils/routing";
 import PlayerProviders from "@/di/playerProviders";
 
@@ -10,12 +10,17 @@ import PlayerProviders from "@/di/playerProviders";
 export default class GenerateViewModel extends AsyncViewModel<GenerateState>{
 
     private readonly repository = new GenerateRepository();
-    private readonly songRepository = new SongRepository();
+    private readonly songRepository = new LibraryRepository();
     private readonly INTERVAL = 1000;
 
     public async onInit(): Promise<void> {
         await super.onInit();
-        this.state.requestId = await this.repository.generate(this.state.query);
+        if(this.state.isRaw){
+            this.state.requestId = await this.repository.rawGenerate(this.state.rawQuery!);
+        }
+        else{
+            this.state.requestId = await this.repository.generate(this.state.query!);
+        }
         this.state.response = new StatusResponse(GenerationStatus.none);
         setInterval(
             () => {

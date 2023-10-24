@@ -1,3 +1,4 @@
+import { useRouter, useRoute, type RouteLocationRaw } from "vue-router";
 
 
 
@@ -19,6 +20,11 @@ export default class RoutingUtils{
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
+	}
+
+	static getUrlParams(){
+		const router = useRoute();
+		return router.query;
 	}
 
 }

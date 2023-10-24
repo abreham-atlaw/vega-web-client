@@ -8,10 +8,10 @@ import { ParentGenerationStage } from "../states/parentGenerationState";
 
 export default class ParentGenerationViewModel extends AsyncViewModel<ParentGenerationState>{
 
-    generate(query: GenerateQuery){
-        this.state.stage = ParentGenerationStage.generation;
+    generate(query?: GenerateQuery, rawQuery?: string){
         this.state.query = query;
+        this.state.rawQuery = rawQuery;
+        this.state.stage = ParentGenerationStage.generation;
     }
-    
 
 }

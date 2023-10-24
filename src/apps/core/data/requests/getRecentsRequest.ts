@@ -9,7 +9,7 @@ export default class GetRecentRequest extends Request<Song[]>{
 
     constructor(){
         super({
-            "url": "core/recents/",
+            "url": "core/song/recent/",
             method: "GET"
         });
     }

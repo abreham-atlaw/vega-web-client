@@ -21,8 +21,8 @@ export default defineComponent({
         };
     },
     methods: {
-        onInputComplete(query: GenerateQuery){
-            this.viewModel.generate(query);
+        onInputComplete(query?: GenerateQuery, rawQuery?: string){
+            this.viewModel.generate(query, rawQuery);
         }
     },
     components: { ViewModelView, InputView, BaseChildView, GenerateView }
@@ -38,9 +38,11 @@ export default defineComponent({
             v-if="state.stage === ParentGenerationStage.input" 
             :on-complete="onInputComplete"
             />
+
             <GenerateView
             v-else
             :query="state.query!"
+            :raw-query="state.rawQuery"
             />
         </BaseChildView>
     </ViewModelView>

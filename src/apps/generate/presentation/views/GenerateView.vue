@@ -16,11 +16,18 @@ export default defineComponent({
     props: {
         query: {
             type: GenerateQuery,
-            required: true
+            default: null
+        },
+        rawQuery: {
+            type: String,
+            default: null
         }
     },
     data() {
-        let state = ref(new GenerateState(this.query));
+        let state = ref(new GenerateState({
+            query: this.query,
+            rawQuery: this.rawQuery
+        }));
         let viewModel = new GenerateViewModel(state.value);
         return {
             state,
@@ -60,7 +67,7 @@ export default defineComponent({
                             <img :src="state.song!.coverImageUrl" class="w-full"/>
                         </div>
                         <h3 class="mt-10 font-bold text-xl">{{ state.song!.title }}</h3>
-                        <h3 class="mt-1 italic">{{ state.query.era }} {{ state.query.mood }} {{ state.query.genre }}</h3>
+                        <h3 class="mt-1 italic">{{ (state.isRaw) ? "Custom Query" : `${ state.query!.era } ${ state.query!.mood } ${ state.query!.genre }` }}</h3>
                     </div>
                     <div class="flex mt-16">
                         <AsyncButton :state="state.downloadState" bg="light" loading-color="primary" class="mr-10 w-52" @click="download">

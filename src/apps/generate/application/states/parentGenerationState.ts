@@ -13,5 +13,6 @@ export default class ParentGenerationState extends BaseState{
 
     stage: ParentGenerationStage = ParentGenerationStage.input;
     query?: GenerateQuery;
+    rawQuery?: string;
 
 }
