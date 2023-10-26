@@ -10,6 +10,27 @@ The vega project is structured as follows:
     https://github.com/abreham-atlaw/oscillate/: This repository contains the source code for training our vocal model.
     https://github.com/abreham-atlaw/vega-web-client: This repository contains source code for the Vega Web Client(Studio)
 
+<h2>Project Structure</h2>
+
+This project is a Vue.js application with a well-structured directory. Below is a brief description of the project structure:
+
+## `src/`
+This is the root directory of the source code.
+
+- `App.vue`: This is the main Vue component.
+- `assets/`: This directory contains static assets like images and CSS files. It has subdirectories for different features like `auth`, `common`, and `generate`, each containing their respective images.
+- `common/`: This directory contains common Vue components, forms, network configurations, serializers, state management, utilities, and view models that are used across different features of the application.
+- `configs/`: This directory contains configuration files for data and UI.
+- `dependency_injection/`: This directory contains provider configurations for dependency injection.
+- `features/`: This directory contains the business logic, data handling, and presentation components for each feature of the application. Each feature like `auth`, `core`, `generate`, and `player` has its own directory structure containing application logic, data models, repositories, requests, serializers, and presentation components.
+- `main.ts`: This is the entry point of the Vue application.
+- `router/`: This directory contains routing configurations for the Vue application.
+- `utils/`: This directory contains utility functions.
+
+Each feature follows a similar structure with `application`, `data`, and `presentation` directories. The `application` directory typically contains forms, states, and view models. The `data` directory includes models, repositories, requests, and serializers. The `presentation` directory holds the Vue components and views related to that feature.
+
+This structure suggests a well-organized codebase where concerns are separated in a clear manner. It should be relatively easy to navigate and maintain.
+
 
 <h2>Purpose</h2>
 
