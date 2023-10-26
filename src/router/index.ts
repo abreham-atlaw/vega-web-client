@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '@/apps/auth/presentation/views/LoginView.vue'
-import SignupView from '@/apps/auth/presentation/views/SignupView.vue'
-import BaseView from '@/apps/core/presentation/views/BaseView.vue';
-import ParentGenerationView from '@/apps/generate/presentation/views/ParentGenerateView.vue'
-import SplashView from '@/apps/core/presentation/views/SplashView.vue'
-import HomeView from '@/apps/core/presentation/views/HomeView.vue'
-import RoutedGenerateView from '@/apps/generate/presentation/views/RoutedGenerateView.vue';
-import LyricsView from '@/apps/player/presentation/views/LyricsView.vue';
-import PlaylistView from '@/apps/core/presentation/views/PlaylistView.vue';
-import LibraryView from '@/apps/core/presentation/views/LibraryView.vue';
+import LoginView from '@/features/auth/presentation/views/LoginView.vue'
+import SignupView from '@/features/auth/presentation/views/SignupView.vue'
+import BaseView from '@/features/core/presentation/views/BaseView.vue';
+import ParentGenerationView from '@/features/generate/presentation/views/ParentGenerateView.vue'
+import SplashView from '@/features/core/presentation/views/SplashView.vue'
+import HomeView from '@/features/core/presentation/views/HomeView.vue'
+import RoutedGenerateView from '@/features/generate/presentation/views/RoutedGenerateView.vue';
+import LyricsView from '@/features/player/presentation/views/LyricsView.vue';
+import PlaylistView from '@/features/core/presentation/views/PlaylistView.vue';
+import LibraryView from '@/features/core/presentation/views/LibraryView.vue';
 
 
 const router = createRouter({

@@ -1,4 +1,4 @@
-import type GenerateQuery from '@/apps/generate/data/models/generateQuery';
+import type GenerateQuery from '@/features/generate/data/models/generateQuery';
 
 
 
