@@ -20,6 +20,15 @@ export default defineComponent({
     methods: {
         play() {
             PlayerProviders.providePlayer().playPlaylist(this.state.playlist!);
+        },
+        share(){
+            navigator.clipboard.writeText(window.location.toString());
+            let toast = this.$toast.open({
+                message: "Coppied to clipboard"
+            });
+            setTimeout(() => {
+                toast.dismiss();
+            }, 5000);
         }
     },
     components: { ViewModelView, BaseChildView }
@@ -51,7 +60,7 @@ export default defineComponent({
                             <button class="mr-10">
                                 <span class="fas fa-download text-xl"></span>
                             </button>
-                            <button class="mr-10">
+                            <button class="mr-10" @click="share">
                                 <span class="fas fa-share text-xl"></span>
                             </button>
         
