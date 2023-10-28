@@ -1,11 +1,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SideBarMenuItemComponent from './SideBarMenuItemComponent.vue';
-
+import logo from '@/assets/common/images/logo.png';
 
 export default defineComponent({
     data(){
         return {
+            logo,
             "menuItems": [
                 {
                     "icon": "home",
@@ -48,7 +49,7 @@ export default defineComponent({
     <div class="bg-dark text-light flex flex-col w-full h-full px-5 pt-10">
 
         <div class="w-1/3 mx-auto mt-5">
-            <img src="/src/assets/common/images/logo.png" class="w-full">
+            <img :src="logo" class="w-full">
         </div>
 
         <div class="mt-16">
