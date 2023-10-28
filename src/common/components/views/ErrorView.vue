@@ -1,5 +1,4 @@
 <script lang="ts">
-import ErrorImage from "@/assets/images/error.png";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -10,9 +9,6 @@ props: {
 	}
 },
 computed: {
-	errorImage() {
-		return ErrorImage;
-	}
 }
 });
 </script>
@@ -20,9 +16,6 @@ computed: {
 <template>
 	<div class="w-full h-screen flex">
 		<div class="m-auto text-center">
-			<div class="w-1/2 m-auto">
-				<img :src="errorImage" class="w-full" />
-			</div>
 			<h1 class="mt-5 text-xl text-center">Sorry, an error has occurred.</h1>
 			<h6 class="mt-5 text-xl text-center">{{ error ? error.message : '' }}</h6>
 			<button class="text-center bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded">
